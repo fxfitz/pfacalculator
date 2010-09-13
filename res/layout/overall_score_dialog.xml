@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:id="@+id/overall_score_dialog_layout_root">
+	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:stretchColumns="0,1">
+
+
+
+		<TableRow>
+			<TextView android:text="Pushup Performance:"
+				android:padding="3dip" />
+			<TextView android:padding="3dip" android:id="@+id/pushup_performance_value" />
+		</TableRow>
+
+		<TableRow>
+			<TextView android:text="Situp Performance:" android:padding="3dip" />
+			<TextView android:padding="3dip" android:id="@+id/situp_performance_value" />
+		</TableRow>
+
+		<TableRow>
+			<TextView android:text="Run Performance:" android:padding="3dip" />
+			<TextView android:padding="3dip" android:id="@+id/run_performance_value" />
+		</TableRow>
+
+		<TableRow>
+			<TextView android:text="Waist Performance:" android:padding="3dip" />
+			<TextView android:padding="3dip" android:id="@+id/waist_performance_value" />
+		</TableRow>
+
+		<TableRow android:padding="10dip">
+
+		</TableRow>
+
+		<TableRow>
+			<TextView android:text="Total Score:" android:padding="3dip"
+				android:textStyle="bold" />
+			<TextView android:padding="3dip" android:id="@+id/total_score_value"
+				android:textColor="#FFFFFF" android:textStyle="bold" />
+		</TableRow>
+		<TableRow>
+			<TextView android:text="Overall Performance:"
+				android:padding="3dip" android:textStyle="bold" />
+			<TextView android:padding="3dip" android:id="@+id/overall_performance_value"
+				android:textStyle="bold" />
+		</TableRow>
+
+	
+
+
+</TableLayout>
+</ScrollView>

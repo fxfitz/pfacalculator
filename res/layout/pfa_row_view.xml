@@ -1,0 +1,8 @@
+<RelativeLayout android:id="@+id/RelativeLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout android:layout_toRightOf="@+id/pfa_rowtext1" android:id="@+id/LinearLayout01" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:padding="5dip"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/pfa_rowtext1" android:layout_alignParentLeft="true" android:layout_centerVertical="true" android:textSize="18sp" android:text="Option"></TextView><TextView android:layout_width="wrap_content" android:layout_below="@+id/pfa_rowtext1" android:layout_height="wrap_content" android:id="@+id/pfa_rowtext3" android:text="Description" android:paddingLeft="20dip" android:textSize="10dip" android:textStyle="italic"></TextView></LinearLayout><TextView android:layout_toRightOf="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/pfa_rowtext2" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:layout_marginRight="10dip" android:text="Selection"></TextView>
+
+
+
+
+</RelativeLayout>

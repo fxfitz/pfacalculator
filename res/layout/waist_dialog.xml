@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content" android:layout_height="wrap_content"
+	android:id="@+id/waist_dialog_layout_root">
+
+	
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:id="@+id/waist_dialog_decimal"
+		android:text="." android:layout_centerInParent="true" android:textStyle="bold" android:textSize="36sp"></TextView>
+ 	<com.rwoar.pfacalculator.widget.NumberPicker
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/waist_dialog_inches" android:layout_toLeftOf="@+id/waist_dialog_decimal" />
+
+	<com.rwoar.pfacalculator.widget.NumberPicker
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/waist_dialog_centimeters" android:layout_toRightOf="@+id/waist_dialog_decimal" />
+
+</RelativeLayout>

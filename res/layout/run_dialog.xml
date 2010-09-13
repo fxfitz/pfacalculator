@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content" android:layout_height="wrap_content"
+	android:id="@+id/run_dialog_layout_root">
+
+	
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:id="@+id/run_dialog_colon"
+		android:text=":" android:layout_centerInParent="true" android:textStyle="bold" android:textSize="36sp"></TextView>
+ 	<com.rwoar.pfacalculator.widget.NumberPicker
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/run_dialog_minute" android:layout_toLeftOf="@+id/run_dialog_colon" />
+
+	<com.rwoar.pfacalculator.widget.NumberPicker
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/run_dialog_second" android:layout_toRightOf="@+id/run_dialog_colon" />
+
+</RelativeLayout>

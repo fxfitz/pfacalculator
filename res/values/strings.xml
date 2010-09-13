@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PFA Calculator</string>
+	<string name="pfacalculator">PFA Calculator</string>
+	<string name="calculate">Calculate</string>
+	<string name="gender">Gender</string>
+	<string name="unanswered">Unanswered</string>
+	<string name="clear">Clear</string>
+	<string name="incompleteCalculatorVO">Please answer all options first.</string>
+	<string name="done">Done</string>
+	<string name="cancel">Cancel</string>
+<string name="minimums">Minimums</string>
+<string name="maximums">Maximums</string>
+</resources>
