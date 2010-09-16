@@ -106,48 +106,53 @@ public class PFACalculator extends ListActivity {
 		switch (id){
 		case OVERALL_SCORE_DIALOG_ID:
 			ScoreCalculator sc = new ScoreCalculator(this, calculatorVO);
+			Double componentScore = new Double(0);
 			
 			TextView situps = (TextView) dialog.findViewById(R.id.situp_performance_value);
+			componentScore = sc.getSitupScore();
 			boolean bool_situp = sc.passedSitups();
 			if (bool_situp == true){
-				situps.setText("Passed");
+				situps.setText("Passed ("+componentScore+")");
 				situps.setTextColor(Color.GREEN);
 			}
 			else {
-				situps.setText("Failed");
+				situps.setText("Faile ("+componentScore+")d");
 				situps.setTextColor(Color.RED);
 			}
 			
 			TextView pushup = (TextView) dialog.findViewById(R.id.pushup_performance_value);
 			boolean bool_pushup = sc.passedPushups();
+			componentScore = sc.getPushupScore();
 			if (bool_pushup == true){
-				pushup.setText("Passed");
+				pushup.setText("Passed ("+componentScore+")");
 				pushup.setTextColor(Color.GREEN);
 			}
 			else {
-				pushup.setText("Failed");
+				pushup.setText("Failed ("+componentScore+")");
 				pushup.setTextColor(Color.RED);
 			}
 			
 			TextView run = (TextView) dialog.findViewById(R.id.run_performance_value);
 			boolean bool_run = sc.passedRun();
+			componentScore = sc.getRunScore();
 			if (bool_run == true){
-				run.setText("Passed");
+				run.setText("Passed ("+componentScore+")");
 				run.setTextColor(Color.GREEN);
 			}
 			else {
-				run.setText("Failed");
+				run.setText("Failed ("+componentScore+")");
 				run.setTextColor(Color.RED);
 			}
 			
 			TextView waist = (TextView) dialog.findViewById(R.id.waist_performance_value);
 			boolean bool_waist = sc.passedWaist();
+			componentScore = sc.getWaistScore();
 			if (bool_waist == true){
-				waist.setText("Passed");
+				waist.setText("Passed ("+componentScore+")");
 				waist.setTextColor(Color.GREEN);
 			}
 			else {
-				waist.setText("Failed");
+				waist.setText("Failed ("+componentScore+")");
 				waist.setTextColor(Color.RED);
 			}
 			
