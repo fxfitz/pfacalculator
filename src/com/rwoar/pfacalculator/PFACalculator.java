@@ -109,50 +109,58 @@ public class PFACalculator extends ListActivity {
 			Double componentScore = new Double(0);
 			
 			TextView situps = (TextView) dialog.findViewById(R.id.situp_performance_value);
+			TextView situpsScore = (TextView) dialog.findViewById(R.id.situp_score_value);
 			componentScore = sc.getSitupScore();
+			situpsScore.setText("("+componentScore.toString()+")");
 			boolean bool_situp = sc.passedSitups();
 			if (bool_situp == true){
-				situps.setText("Passed ("+componentScore+")");
+				situps.setText("Passed");
 				situps.setTextColor(Color.GREEN);
 			}
 			else {
-				situps.setText("Faile ("+componentScore+")d");
+				situps.setText("Failed");
 				situps.setTextColor(Color.RED);
 			}
 			
 			TextView pushup = (TextView) dialog.findViewById(R.id.pushup_performance_value);
 			boolean bool_pushup = sc.passedPushups();
+			TextView pushupsScore = (TextView) dialog.findViewById(R.id.pushup_score_value);
 			componentScore = sc.getPushupScore();
+			pushupsScore.setText("("+componentScore.toString()+")");
 			if (bool_pushup == true){
-				pushup.setText("Passed ("+componentScore+")");
+				pushup.setText("Passed");
 				pushup.setTextColor(Color.GREEN);
 			}
 			else {
-				pushup.setText("Failed ("+componentScore+")");
+				pushup.setText("Failed");
 				pushup.setTextColor(Color.RED);
 			}
 			
 			TextView run = (TextView) dialog.findViewById(R.id.run_performance_value);
 			boolean bool_run = sc.passedRun();
+			TextView runScore = (TextView) dialog.findViewById(R.id.run_score_value);
 			componentScore = sc.getRunScore();
+			runScore.setText("("+componentScore.toString()+")");
 			if (bool_run == true){
-				run.setText("Passed ("+componentScore+")");
+				run.setText("Passed");
 				run.setTextColor(Color.GREEN);
 			}
 			else {
-				run.setText("Failed ("+componentScore+")");
+				run.setText("Failed");
 				run.setTextColor(Color.RED);
 			}
 			
 			TextView waist = (TextView) dialog.findViewById(R.id.waist_performance_value);
 			boolean bool_waist = sc.passedWaist();
+			TextView waistScore = (TextView) dialog.findViewById(R.id.waist_score_value);
 			componentScore = sc.getWaistScore();
+			waistScore.setText("("+componentScore.toString()+")");
 			if (bool_waist == true){
-				waist.setText("Passed ("+componentScore+")");
+				waist.setText("Passed");
 				waist.setTextColor(Color.GREEN);
 			}
 			else {
-				waist.setText("Failed ("+componentScore+")");
+				waist.setText("Failed");
 				waist.setTextColor(Color.RED);
 			}
 			
