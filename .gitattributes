@@ -1,5 +1,4 @@
 * text=auto !eol
-/.project -text svneol=unset#text/plain
 /AndroidManifest.xml -text
 assets/30-39/female/pushups.properties -text
 assets/30-39/female/run.properties -text
@@ -41,7 +40,6 @@ assets/under30/male/pushups.properties -text
 assets/under30/male/run.properties -text
 assets/under30/male/situps.properties -text
 assets/under30/male/waist.properties -text
-/default.properties -text
 libs/admob-sdk-android.jar -text
 res/drawable-hdpi/timepicker_down_disabled.9.png -text
 res/drawable-hdpi/timepicker_down_disabled_focused.9.png -text
