@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="aerobic_component">
+        <item>Run (1.5 Mile)</item>
+        <item>Walk (1.0 Mile)</item>
+    </string-array>
+    
+    <string-array name="aerobic_component_values">
+        <item>1</item>
+		<item>2</item>
+    </string-array>   
+</resources>

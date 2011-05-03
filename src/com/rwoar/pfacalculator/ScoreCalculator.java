@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.util.Log;
 
@@ -22,34 +23,103 @@ public class ScoreCalculator {
 	private final Properties situpProperties;
 	private final Properties pushupProperties;
 	private final Properties runProperties;
+	private final Properties walkProperties;
 	
-	private double runScore;
-	private double situpScore;
-	private double pushupScore;
-	private double waistScore;
+	private double runScore = 0;
+	private double situpScore = 0;
+	private double pushupScore = 0;
+	private double waistScore = 0;
+	private double walkScore = 0;
+	
+	private int min_situp, max_situp;
+	private int min_pushup, max_pushup;
+	private double min_waist, max_waist;
+	private int min_run, max_run;
+	private int min_walk, max_walk;
+	
+	private boolean pushupPref;
+	private boolean situpPref;
+	private boolean aerobicPref;
+	private boolean waistPref;
+	private String aerobicCompPref;
+	
+	private final int RUN = 1;
+	private final int WALK = 2;
 		
 	// Used for rounding scores to one decimal place
 	private final DecimalFormat oneDForm = new DecimalFormat("#.#");
 
-	public ScoreCalculator(Activity ac, CalculatorVO calc){
-		if (calc.isComplete() == false){
-			throw new RuntimeException("All options must be selected (pushups, situps, gender, etc)");
-		}
+	public ScoreCalculator(Activity ac, CalculatorVO calc, SharedPreferences prefs){
+//		if (calc.isComplete() == false){
+//			throw new RuntimeException("All options must be selected (pushups, situps, gender, etc)");
+//		}
+		
+		if (prefs != null)
+			setPrefs(prefs);
+		
 		calculatorVO = calc;
 		parentActivity = ac;
 		pushupProperties = this.getProperties("pushups.properties");
 		situpProperties = this.getProperties("situps.properties");
 		waistProperties = this.getProperties("waist.properties");
 		runProperties = this.getProperties("run.properties");
-		situpScore = setSitupScore();
-		pushupScore = setPushupScore();
+		walkProperties = this.getProperties("walk.properties");
+		
 		waistScore = setWaistScore();
-		runScore = setRunScore();
+		if (situpPref)
+			situpScore = setSitupScore();
+		if (pushupPref)
+			pushupScore = setPushupScore();
+		if (aerobicPref){
+			if (aerobicCompPref.equals(Integer.toString(RUN)))
+				runScore = setRunScore();
+			else
+				walkScore = setWalkScore();
+		}
+		
+		setWaistMinMax();	
+		setPushupMinMax();
+		setSitupMinMax();
+		setRunMinMax();
+		setWalkMinMax();
+		
+	}
+	
+	private void setPrefs(SharedPreferences prefs){
+		pushupPref = prefs.getBoolean("pushupPref", true);
+		situpPref = prefs.getBoolean("situpPref", true);
+		aerobicPref = prefs.getBoolean("runPref", true);
+		waistPref = prefs.getBoolean("waistPref", true);
+		aerobicCompPref = prefs.getString("aerobicCompPref", "1");
 	}
 	
 	public double getTotalScore(){
-		double total = situpScore + pushupScore + runScore + waistScore;
-				
+		//double total = situpScore + pushupScore + runScore + waistScore;
+		double totalpoints = 0;
+		double maxpoints = 0;
+		double total;
+		
+		if (pushupPref == true){
+			maxpoints += Double.parseDouble(pushupProperties.getProperty("max_point"));
+			totalpoints += pushupScore;
+		}
+		if (situpPref == true){
+			maxpoints += Double.parseDouble(situpProperties.getProperty("max_point"));
+			totalpoints += situpScore;
+		}
+		if (aerobicPref == true){
+			maxpoints += Double.parseDouble(runProperties.getProperty("max_point"));
+			if (aerobicCompPref.equals(Integer.toString(RUN)))
+				totalpoints += runScore;
+			else
+				totalpoints += walkScore;
+		}
+		if (waistPref == true){
+			maxpoints += Double.parseDouble(waistProperties.getProperty("max_point"));
+			totalpoints += waistScore;
+		}
+		
+		total = totalpoints / maxpoints * 100;
 		return Double.valueOf(oneDForm.format(total));		
 	}
 	
@@ -57,20 +127,64 @@ public class ScoreCalculator {
 		return pushupScore;
 	}
 	
+	public int getPushupMin(){
+		return this.min_pushup;
+	}
+	
+	public int getPushupMax(){
+		return this.max_pushup;
+	}
+	
 	public double getSitupScore(){
 		return situpScore;
+	}
+	
+	public int getSitupMin(){
+		return this.min_situp;
+	}
+	
+	public int getSitupMax(){
+		return this.max_situp;
 	}
 	
 	public double getRunScore(){
 		return runScore;
 	}
 	
+	public int getRunMin(){
+		return this.min_run;
+	}
+	
+	public int getRunMax(){
+		return this.max_run;
+	}
+	
+	public double getWalkScore(){
+		return walkScore;
+	}
+	
+	public int getWalkMin(){
+		return this.min_walk;
+	}
+	
+	public int getWalkMax(){
+		return this.max_walk;
+	}
+	
 	public double getWaistScore(){
 		return waistScore;
 	}
 	
+	public double getWaistMin(){
+		return min_waist;
+	}
+	
+	public double getWaistMax(){
+		return max_waist;
+	}
+	
 	public boolean passedPushups(){
-		if (calculatorVO.getPushups() < Integer.parseInt(pushupProperties.getProperty("min_pass_amount"))){
+		if (pushupPref && calculatorVO.getPushups() < Integer.parseInt(pushupProperties.getProperty("min_pass_amount"))){
 			return false;
 		}
 		else {
@@ -79,7 +193,7 @@ public class ScoreCalculator {
 	}
 	
 	public boolean passedSitups(){
-		if (calculatorVO.getSitups() < Integer.parseInt(situpProperties.getProperty("min_pass_amount"))){
+		if (situpPref && calculatorVO.getSitups() < Integer.parseInt(situpProperties.getProperty("min_pass_amount"))){
 			return false;
 		}
 		else {
@@ -88,7 +202,7 @@ public class ScoreCalculator {
 	}
 	
 	public boolean passedWaist(){
-		if (calculatorVO.getWaist() > Double.parseDouble(waistProperties.getProperty("min_pass_amount"))){
+		if (waistPref && calculatorVO.getWaist() > Double.parseDouble(waistProperties.getProperty("min_pass_amount"))){
 			return false;
 		}
 		else {
@@ -98,7 +212,18 @@ public class ScoreCalculator {
 	
 	public boolean passedRun(){
 		int runtime = Integer.parseInt(Integer.toString(calculatorVO.getRunMinute()*100+calculatorVO.getRunSecond()));
-		if (runtime > Integer.parseInt(runProperties.getProperty("min_pass_amount"))){
+		if (aerobicPref && aerobicCompPref.equals(Integer.toString(RUN)) 
+				&& runtime > Integer.parseInt(runProperties.getProperty("min_pass_amount"))){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public boolean passedWalk(){
+		if (aerobicPref && aerobicCompPref.equals(Integer.toString(WALK)) 
+				&& getVO2Max() < Integer.parseInt(walkProperties.getProperty("min_pass_amount"))){
 			return false;
 		}
 		else {
@@ -107,7 +232,7 @@ public class ScoreCalculator {
 	}
 	
 	public boolean passedOverallTest(){
-		if (passedRun() && passedWaist() && passedSitups() && 
+		if (passedRun() && passedWalk() && passedWaist() && passedSitups() && 
 				passedPushups() && getTotalScore() >= MIN_TOTAL_SCORE)
 			return true;
 		else
@@ -121,17 +246,23 @@ public class ScoreCalculator {
 		if (pushups >= Integer.parseInt(pushupProperties.getProperty("max_point_amount"))){
 			score = Double.parseDouble(pushupProperties.getProperty("max_point"));
 		}
-		else if (pushups <= Integer.parseInt(pushupProperties.getProperty("min_point_amount"))){
+		// Changing from min_point_amount to min_pass_amount because of regulation 
+		// change effective 1 Jan 2011 
+		else if (pushups < Integer.parseInt(pushupProperties.getProperty("min_pass_amount"))){
 			score = Double.parseDouble(pushupProperties.getProperty("min_point"));
 		}
 		else {
 			score = Double.parseDouble(pushupProperties.getProperty(""+pushups));
 		}
 
-		
 		return Double.valueOf(oneDForm.format(score));
 	}
 
+	private void setPushupMinMax(){
+		this.min_pushup = Integer.parseInt(pushupProperties.getProperty("min_pass_amount"));
+		this.max_pushup = Integer.parseInt(pushupProperties.getProperty("max_point_amount"));
+	}
+	
 	private double setSitupScore(){
 		double score = 0;
 		int situps = calculatorVO.getSitups();
@@ -139,7 +270,7 @@ public class ScoreCalculator {
 		if (situps >= Integer.parseInt(situpProperties.getProperty("max_point_amount"))){
 			score = Double.parseDouble(situpProperties.getProperty("max_point"));
 		}
-		else if (situps <= Integer.parseInt(situpProperties.getProperty("min_point_amount"))){
+		else if (situps < Integer.parseInt(situpProperties.getProperty("min_pass_amount"))){
 			score = Double.parseDouble(situpProperties.getProperty("min_point"));
 		}
 		else {
@@ -147,6 +278,11 @@ public class ScoreCalculator {
 		}
 
 		return Double.valueOf(oneDForm.format(score));
+	}
+	
+	private void setSitupMinMax(){
+		this.min_situp = Integer.parseInt(situpProperties.getProperty("min_pass_amount"));
+		this.max_situp = Integer.parseInt(situpProperties.getProperty("max_point_amount"));
 	}
 
 	/**
@@ -165,7 +301,7 @@ public class ScoreCalculator {
 		if (runtime <= Integer.parseInt(runProperties.getProperty("max_point_amount"))){
 			score = Double.parseDouble(runProperties.getProperty("max_point"));
 		}
-		else if (runtime >= Integer.parseInt(runProperties.getProperty("min_point_amount"))){
+		else if (runtime > Integer.parseInt(runProperties.getProperty("min_pass_amount"))){
 			score = Double.parseDouble(runProperties.getProperty("min_point"));
 		}
 		else{
@@ -181,24 +317,73 @@ public class ScoreCalculator {
 					// Ignore it!
 				}
 			}
+			
+			// Sort the intervals
 			Collections.sort(startIntervals);
 
 			ListIterator<Integer> intervalItr = startIntervals.listIterator();
 			while (intervalItr.hasNext()){
 				Integer time = intervalItr.next();
-
-				if (runtime >= time && runtime < intervalItr.next()){
+		
+				if (runtime < time){
+					// The double call is needed apparently :(
+					time = intervalItr.previous();
+					time = intervalItr.previous();
 					score = Double.parseDouble(runProperties.getProperty(Integer.toString(time)));
 					break;
-				}
-				else{
-					intervalItr.previous();
 				}
 			}
 		}
 
 		
 		return Double.valueOf(oneDForm.format(score));
+	}
+	
+
+	private void setRunMinMax(){
+		this.min_run = Integer.parseInt(runProperties.getProperty("min_pass_amount"));
+		this.max_run = Integer.parseInt(runProperties.getProperty("max_point_amount"));
+	}
+	
+	private int getVO2Max(){
+		int weight = calculatorVO.getWeight();
+		int age = calculatorVO.getExactAge();
+		double run = calculatorVO.getRunMinute() + (calculatorVO.getRunSecond()/60.0);
+		int hr = calculatorVO.getHeartRate();
+				
+		//Log.d("getVO2Max()", "weight="+weight+";age="+age+";run="+run+";hr="+hr);
+		
+		int int_vo2max;
+		double VO2max = 132.853 - (.0769 * weight) - (.3877 * age) - (3.2649 * run) - (.1565*hr);
+		if (calculatorVO.getGender() == CalculatorVO.MALE)
+			VO2max += 6.315;
+		
+		int_vo2max = (int) Math.round(VO2max);
+		
+		return int_vo2max;
+	}
+	
+	private double setWalkScore(){
+		double score = 0;
+		int VO2max = getVO2Max();
+		
+		if (VO2max >= Double.parseDouble(walkProperties.getProperty("max_point_amount"))){
+			score = Double.parseDouble(walkProperties.getProperty("max_point"));
+		}
+		else if (VO2max < Double.parseDouble(walkProperties.getProperty("min_pass_amount"))){
+			score = Double.parseDouble(walkProperties.getProperty("min_point"));
+		}
+		else {
+			score = Double.parseDouble(walkProperties.getProperty(""+VO2max));
+		}
+
+		
+		return Double.valueOf(oneDForm.format(score));
+	}
+	
+	private void setWalkMinMax(){
+		this.min_walk = Integer.parseInt(walkProperties.getProperty("min_pass_amount"));
+		this.max_walk = Integer.parseInt(walkProperties.getProperty("max_point_amount"));
 	}
 
 	private double setWaistScore(){
@@ -208,7 +393,7 @@ public class ScoreCalculator {
 		if (waist <= Double.parseDouble(waistProperties.getProperty("max_point_amount"))){
 			score = Double.parseDouble(waistProperties.getProperty("max_point"));
 		}
-		else if (waist >= Double.parseDouble(waistProperties.getProperty("min_point_amount"))){
+		else if (waist > Double.parseDouble(waistProperties.getProperty("min_pass_amount"))){
 			score = Double.parseDouble(waistProperties.getProperty("min_point"));
 		}
 		else {
@@ -219,6 +404,11 @@ public class ScoreCalculator {
 		return Double.valueOf(oneDForm.format(score));
 	}
 
+	private void setWaistMinMax(){
+		this.min_waist = Double.parseDouble(waistProperties.getProperty("min_pass_amount"));
+		this.max_waist = Double.parseDouble(waistProperties.getProperty("max_point_amount"));
+	}
+	
 	private Properties getProperties(String filename){
 		AssetManager assetManager = parentActivity.getAssets();
 		Properties prop = new Properties();

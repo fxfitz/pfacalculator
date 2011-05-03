@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+                android:title="Tested Components">
+                <CheckBoxPreference
+                        android:title="@string/waist_measurement"
+                        android:defaultValue="true"
+                        android:key="waistPref" />
+                <CheckBoxPreference
+                        android:title="@string/pushups"
+                        android:defaultValue="true"
+                        android:key="pushupPref" />
+                <CheckBoxPreference
+                        android:title="@string/situps"
+                        android:defaultValue="true"
+                        android:key="situpPref" />
+                <CheckBoxPreference
+                        android:title="@string/aerobic_fitness"
+                        android:defaultValue="true"
+                        android:key="runPref" />
+                <ListPreference
+                	android:title="Aerobic Test"
+                	android:summary="1.5 Mile Walk or 1.0 Mile Run"
+                	android:dependency="runPref"
+                	android:key="aerobicCompPref"
+                	android:defaultValue="1"
+                	android:entries="@array/aerobic_component"
+                	android:entryValues="@array/aerobic_component_values" />
+        </PreferenceCategory>
+ </PreferenceScreen>

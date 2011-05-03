@@ -4,42 +4,52 @@ assets/30-39/female/pushups.properties -text
 assets/30-39/female/run.properties -text
 assets/30-39/female/situps.properties -text
 assets/30-39/female/waist.properties -text
+assets/30-39/female/walk.properties -text svneol=unset#text/plain
 assets/30-39/male/pushups.properties -text
 assets/30-39/male/run.properties -text
 assets/30-39/male/situps.properties -text
 assets/30-39/male/waist.properties -text
+assets/30-39/male/walk.properties -text svneol=unset#text/plain
 assets/40-49/female/pushups.properties -text
 assets/40-49/female/run.properties -text
 assets/40-49/female/situps.properties -text
 assets/40-49/female/waist.properties -text
+assets/40-49/female/walk.properties -text svneol=unset#text/plain
 assets/40-49/male/pushups.properties -text
 assets/40-49/male/run.properties -text
 assets/40-49/male/situps.properties -text
 assets/40-49/male/waist.properties -text
+assets/40-49/male/walk.properties -text svneol=unset#text/plain
 assets/50-59/female/pushups.properties -text
 assets/50-59/female/run.properties -text
 assets/50-59/female/situps.properties -text
 assets/50-59/female/waist.properties -text
+assets/50-59/female/walk.properties -text svneol=unset#text/plain
 assets/50-59/male/pushups.properties -text
 assets/50-59/male/run.properties -text
 assets/50-59/male/situps.properties -text
 assets/50-59/male/waist.properties -text
+assets/50-59/male/walk.properties -text svneol=unset#text/plain
 assets/60+/female/pushups.properties -text
 assets/60+/female/run.properties -text
 assets/60+/female/situps.properties -text
 assets/60+/female/waist.properties -text
+assets/60+/female/walk.properties -text svneol=unset#text/plain
 assets/60+/male/pushups.properties -text
 assets/60+/male/run.properties -text
 assets/60+/male/situps.properties -text
 assets/60+/male/waist.properties -text
+assets/60+/male/walk.properties -text svneol=unset#text/plain
 assets/under30/female/pushups.properties -text
 assets/under30/female/run.properties -text
 assets/under30/female/situps.properties -text
 assets/under30/female/waist.properties -text
+assets/under30/female/walk.properties -text svneol=unset#text/plain
 assets/under30/male/pushups.properties -text
 assets/under30/male/run.properties -text
 assets/under30/male/situps.properties -text
 assets/under30/male/waist.properties -text
+assets/under30/male/walk.properties -text svneol=unset#text/plain
 libs/admob-sdk-android.jar -text
 res/drawable-hdpi/timepicker_down_disabled.9.png -text
 res/drawable-hdpi/timepicker_down_disabled_focused.9.png -text
@@ -84,10 +94,13 @@ res/layout/pfa_row_view.xml -text
 res/layout/run_dialog.xml -text
 res/layout/waist_dialog.xml -text
 res/menu/pfa_calculator.xml -text
+res/values/array.xml -text svneol=unset#text/plain
 res/values/attrs.xml -text
 res/values/strings.xml -text
+res/xml/preferences.xml -text svneol=unset#text/plain
 src/com/rwoar/pfacalculator/CalculatorVO.java -text
 src/com/rwoar/pfacalculator/PFACalculator.java -text
+src/com/rwoar/pfacalculator/Preferences.java -text svneol=unset#text/plain
 src/com/rwoar/pfacalculator/ScoreCalculator.java -text
 src/com/rwoar/pfacalculator/widget/NumberPicker.java -text
 src/com/rwoar/pfacalculator/widget/NumberPickerButton.java -text

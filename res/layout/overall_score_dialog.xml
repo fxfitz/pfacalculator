@@ -19,7 +19,7 @@
 		</TableRow>
 
 		<TableRow>
-			<TextView android:text="Run Performance:" android:padding="3dip" />
+			<TextView android:text="Aerobic Performance:" android:padding="3dip" />
 			<TextView android:padding="3dip" android:id="@+id/run_performance_value" />
 			<TextView android:padding="3dip" android:id="@+id/run_score_value" android:textColor="#ffffff"/>
 		</TableRow>

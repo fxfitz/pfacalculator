@@ -6,16 +6,15 @@
 	<TableRow android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:id="@+id/header_row">
 		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/component_column"
-			android:text="Component"></TextView>
+			android:layout_height="wrap_content"></TextView>
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:id="@+id/male_column"
-			android:text="Males" android:paddingLeft="20dip"
-			android:paddingRight="20dip"></TextView>
+			android:paddingLeft="20dip"
+			android:paddingRight="20dip" android:text="Minimums"></TextView>
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:id="@+id/female_column"
-			android:text="Females" android:paddingLeft="20dip"
-			android:paddingRight="20dip"></TextView>
+			android:paddingLeft="20dip"
+			android:paddingRight="20dip" android:text="Maximums"></TextView>
 	</TableRow>
 
 	<TableRow android:padding="10dip"></TableRow>
@@ -24,28 +23,28 @@
 		android:layout_height="wrap_content" android:id="@+id/waist_row">
 		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="Waist"></TextView>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/waist_male"></TextView>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/waist_female"></TextView>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/waist_min" android:gravity="center_vertical|center_horizontal"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/waist_max" android:gravity="center_vertical|center_horizontal"></TextView>
 </TableRow>
 	<TableRow android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:id="@+id/pushup_row">
 		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="Pushups"></TextView>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/pushup_male"></TextView>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/pushup_female"></TextView>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/pushup_min" android:gravity="center_vertical|center_horizontal"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/pushup_max" android:gravity="center_vertical|center_horizontal"></TextView>
 </TableRow>
 	<TableRow android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:id="@+id/situp_row">
 		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:text="Situps"></TextView>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/situp_male"></TextView>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/situp_female"></TextView>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/situp_min" android:gravity="center_vertical|center_horizontal"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/situp_max" android:gravity="center_vertical|center_horizontal"></TextView>
 </TableRow>
 
 <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/run_row">
 		<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="Run"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/run_male"></TextView>
-<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/run_female"></TextView>
+			android:layout_height="wrap_content" android:text="Run"></TextView><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/run_min" android:gravity="center_vertical|center_horizontal"></TextView>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/run_max" android:gravity="center_vertical|center_horizontal"></TextView>
 </TableRow>
 
 

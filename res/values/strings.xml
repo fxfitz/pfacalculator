@@ -7,8 +7,15 @@
 	<string name="unanswered">Unanswered</string>
 	<string name="clear">Clear</string>
 	<string name="incompleteCalculatorVO">Please answer all options first.</string>
+	<string name="chooseAgeGroup">Please choose your Age Group first.</string>
 	<string name="done">Done</string>
 	<string name="cancel">Cancel</string>
-<string name="minimums">Minimums</string>
-<string name="maximums">Maximums</string>
+	<string name="minmax">Min/Max</string>
+	<string name="genderandage">Please select a gender and age first.</string>
+	<string name="preferences">Preferences</string>
+	<string name="pushups">Push-Ups</string>
+	<string name="situps">Sit-Ups</string>
+	<string name="run">Run</string>
+	<string name="aerobic_fitness">Aerobic Fitness</string>
+	<string name="waist_measurement">Waist Measurement</string>
 </resources>
