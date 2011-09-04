@@ -19,4 +19,11 @@
 	<string name="aerobic_fitness">Aerobic Fitness</string>
 	<string name="waist_measurement">Waist Measurement</string>
 	<string name="AFICharts">AFI Charts</string>
+	<string name="male">Male</string>
+	<string name="female">Female</string>
+	<string name="under30">Under 30</string>
+	<string name="thirtyUp">30 to 39</string>
+	<string name="fourtyUp">40 to 49</string>
+	<string name="fiftyUp">50 to 59</string>
+	<string name="sixtyUp">60+</string>
 </resources>

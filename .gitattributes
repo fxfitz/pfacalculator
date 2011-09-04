@@ -83,6 +83,7 @@ res/drawable-mdpi/timepicker_up_disabled_focused.9.png -text
 res/drawable-mdpi/timepicker_up_normal.9.png -text
 res/drawable-mdpi/timepicker_up_pressed.9.png -text
 res/drawable-mdpi/timepicker_up_selected.9.png -text
+res/layout/aficharts_dialog.xml -text svneol=unset#text/plain
 res/layout/minimum_maximum_dialog.xml -text
 res/layout/number_dialog.xml -text
 res/layout/number_picker.xml -text

@@ -24,7 +24,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.ads.*;
 import com.rwoar.pfacalculator.widget.NumberPicker;
 
 
@@ -43,6 +42,7 @@ public class PFACalculator extends ListActivity {
 	private final int EXACT_AGE_DIALOG_ID = 9;
 	private final int HEART_RATE_DIALOG_ID = 10;
 	private final int WEIGHT_DIALOG_ID = 11;
+	private final int AFICHART_DIALOG_ID = 12;
 
 	private final int DEFAULT_PUSHUP = 45;
 	private final int DEFAULT_SITUP = 50;
@@ -126,6 +126,8 @@ public class PFACalculator extends ListActivity {
 			return overallScoreDialog();
 		case MINMAX_DIALOG_ID:
 			return minimumsMaximumsDialog(FOR_MINMAX);
+		case AFICHART_DIALOG_ID:
+			return afiChartsDialog();
 		default:
 			return null;
 		}
@@ -250,6 +252,9 @@ public class PFACalculator extends ListActivity {
 		case MINMAX_DIALOG_ID:
 			prepareMinMaxDialog(dialog);
 			break;
+		case AFICHART_DIALOG_ID:
+			prepareAfiChartDialog(dialog);
+			break;
 		}
 	}
 
@@ -339,6 +344,14 @@ public class PFACalculator extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
+		case R.id.afiChartsButton:
+			if (calculatorVO.getAgeGroup() == CalculatorVO.UNASSIGNED || calculatorVO.getGender() == CalculatorVO.UNASSIGNED){
+				Toast.makeText(getApplicationContext(), R.string.genderandage, Toast.LENGTH_SHORT).show();
+				return false;
+			} else {
+				showDialog(AFICHART_DIALOG_ID);
+				return true;
+			}
 		case R.id.minmaxMenuButton:
 			if (calculatorVO.getAgeGroup() == CalculatorVO.UNASSIGNED || calculatorVO.getGender() == CalculatorVO.UNASSIGNED){
 				Toast.makeText(getApplicationContext(), R.string.genderandage, Toast.LENGTH_SHORT).show();
@@ -723,5 +736,28 @@ public class PFACalculator extends ListActivity {
 		TextView run_max = (TextView) dialog.findViewById(R.id.run_max);
 		run_max.setText(runmaxstr);
 
+	}
+	
+	private AlertDialog afiChartsDialog(){
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		Context mContext = getApplicationContext();
+		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.aficharts_dialog,
+				(ViewGroup) findViewById(R.id.afi_dialog_layout_root));
+		alert.setTitle(calculatorVO.getGenderString()+"; "+calculatorVO.getAgeGroupString());  
+
+		alert.setView(layout);
+		alert.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {  
+			public void onClick(DialogInterface dialog, int whichButton) {
+				return;                  
+			}  
+		});  
+
+		AlertDialog ad = alert.create();
+		return ad;
+	}
+	
+	private void prepareAfiChartDialog(Dialog dialog){
+		
 	}
 }
