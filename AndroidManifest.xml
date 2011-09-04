@@ -13,11 +13,9 @@
 			android:label="@string/preferences">
 		</activity>
 		
-		<meta-data android:value="a14c8ce72f0eb1f" android:name="ADMOB_PUBLISHER_ID" />
 		<!-- AdMobActivity definition -->
-		<activity android:name="com.admob.android.ads.AdMobActivity"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-			android:configChanges="orientation|keyboard|keyboardHidden" />
+        <activity android:name="com.google.ads.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation"/>
 		
 		<!-- Track Market installs -->
 		<receiver android:name="com.admob.android.ads.analytics.InstallReceiver"
@@ -29,4 +27,5 @@
 	</application>
 	<uses-sdk android:minSdkVersion="4" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 </manifest> 

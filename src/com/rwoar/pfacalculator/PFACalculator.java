@@ -24,6 +24,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.ads.*;
 import com.rwoar.pfacalculator.widget.NumberPicker;
 
 
@@ -62,8 +63,7 @@ public class PFACalculator extends ListActivity {
 	private boolean aerobicPref;
 	private boolean waistPref;
 	private String aerobicCompPref;
-
-
+	
 	private CalculatorVO calculatorVO = null;
 	static ArrayList<HashMap<String,String>> optionsList; 
 

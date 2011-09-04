@@ -18,4 +18,5 @@
 	<string name="run">Run</string>
 	<string name="aerobic_fitness">Aerobic Fitness</string>
 	<string name="waist_measurement">Waist Measurement</string>
+	<string name="AFICharts">AFI Charts</string>
 </resources>

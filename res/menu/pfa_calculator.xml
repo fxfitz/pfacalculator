@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/minmaxMenuButton" android:title="@string/minmax"/>
-	<item android:id="@+id/preferencesMenuButton" android:title="@string/preferences"/>
+	<item android:id="@+id/afiChartsButton" android:title="@string/AFICharts"></item><item android:id="@+id/minmaxMenuButton" android:title="@string/minmax"></item>
+	<item android:id="@+id/preferencesMenuButton" android:title="@string/preferences"></item>
+	
 </menu>
