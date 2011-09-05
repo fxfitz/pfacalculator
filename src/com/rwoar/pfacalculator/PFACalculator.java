@@ -13,6 +13,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,8 +23,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TableRow.LayoutParams;
 
 import com.rwoar.pfacalculator.widget.NumberPicker;
 
@@ -63,7 +68,7 @@ public class PFACalculator extends ListActivity {
 	private boolean aerobicPref;
 	private boolean waistPref;
 	private String aerobicCompPref;
-	
+
 	private CalculatorVO calculatorVO = null;
 	static ArrayList<HashMap<String,String>> optionsList; 
 
@@ -195,7 +200,7 @@ public class PFACalculator extends ListActivity {
 					componentScore = sc.getRunScore();
 				else
 					componentScore = sc.getWalkScore();
-				
+
 				runWalkScore.setText("("+componentScore.toString()+")");
 			}
 			if (aerobicPref == false){
@@ -285,7 +290,7 @@ public class PFACalculator extends ListActivity {
 			showDialog(HEART_RATE_DIALOG_ID);
 		else if (choice.get("option").equals("Weight"))
 			showDialog(WEIGHT_DIALOG_ID);
-		
+
 	}
 
 	public void buttonClickHandler(View v)
@@ -378,7 +383,7 @@ public class PFACalculator extends ListActivity {
 		aerobicCompPref = prefs.getString("aerobicCompPref", "1");
 
 		// USED FOR DEBUGGING;
-		
+
 		//		Log.d("getPrefs()", aerobicCompPref);
 		//		if (aerobicCompPref.equals(Integer.toString(RUN))){
 		//			Log.d("getPrefs()", "RUNNING!");
@@ -414,7 +419,7 @@ public class PFACalculator extends ListActivity {
 
 		if (aerobicPref == true){
 			HashMap<String,String> temp3 = new HashMap<String,String>();
-			
+
 			if (aerobicCompPref.equals(Integer.toString(RUN))){
 				temp3.put("option","Run Time");
 				temp3.put("selection", calculatorVO.getRunWalkString());
@@ -423,19 +428,19 @@ public class PFACalculator extends ListActivity {
 				temp3.put("option","Walk Time");
 				temp3.put("selection", calculatorVO.getRunWalkString());
 				temp3.put("description", "1.0 Mile Walk");
-				
+
 				HashMap<String,String> temp6 = new HashMap<String,String>();
 				temp6.put("option","Exact Age");
 				temp6.put("selection", calculatorVO.getExactAgeString());
 				temp6.put("description", "Exact Age");
 				optionsList.add(temp6);
-				
+
 				HashMap<String,String> temp7 = new HashMap<String,String>();
 				temp7.put("option","Heart Rate");
 				temp7.put("selection", calculatorVO.getHeartRateString());
 				temp7.put("description", "Heart Rate After Walk");
 				optionsList.add(temp7);
-				
+
 				HashMap<String,String> temp8 = new HashMap<String,String>();
 				temp8.put("option","Weight");
 				temp8.put("selection", calculatorVO.getWeightString());
@@ -444,15 +449,15 @@ public class PFACalculator extends ListActivity {
 			}
 			optionsList.add(temp3);
 		}
-		
-		
+
+
 
 		HashMap<String,String> temp4 = new HashMap<String,String>();
 		temp4.put("option","Age Group");
 		temp4.put("selection", calculatorVO.getAgeGroupString());
 		temp4.put("description", "Age Category");
 		optionsList.add(1, temp4);
-		
+
 		if (waistPref == true){
 			HashMap<String,String> temp5 = new HashMap<String,String>();
 			temp5.put("option","Waist Measurement");
@@ -737,7 +742,7 @@ public class PFACalculator extends ListActivity {
 		run_max.setText(runmaxstr);
 
 	}
-	
+
 	private AlertDialog afiChartsDialog(){
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		Context mContext = getApplicationContext();
@@ -756,8 +761,13 @@ public class PFACalculator extends ListActivity {
 		AlertDialog ad = alert.create();
 		return ad;
 	}
-	
+
 	private void prepareAfiChartDialog(Dialog dialog){
-		
+		ScoreCalculator sc = new ScoreCalculator(this, calculatorVO, null);
+
+		PFAUtils.setupAfiPushupTbl(this, dialog, sc);
+		PFAUtils.setupAfiSitupTbl(this, dialog, sc);
+		PFAUtils.setupAfiWaistTbl(this, dialog, sc);
+		PFAUtils.setupAfiRunTbl(this, dialog, sc);
 	}
 }

@@ -7,9 +7,9 @@
 
 		<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:stretchColumns="0,2" android:id="@+id/afi_run_table">
+			android:stretchColumns="0,2" android:id="@+id/afi_run_table" android:gravity="center">
 			<TableRow android:layout_height="wrap_content"
-				android:layout_width="wrap_content">
+				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:gravity="center"
 					android:text="@string/aerobic_fitness"></TextView>
@@ -18,9 +18,9 @@
 
 		<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:stretchColumns="0,2" android:id="@+id/afi_waist_table">
+			android:stretchColumns="0,2" android:id="@+id/afi_waist_table" android:gravity="center">
 			<TableRow android:layout_height="wrap_content"
-				android:layout_width="wrap_content">
+				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:gravity="center"
 					android:text="@string/waist_measurement"></TextView>
@@ -28,9 +28,9 @@
 		</TableLayout>
 		<TableLayout android:stretchColumns="0,2"
 			android:id="@+id/afi_pushup_table" android:layout_height="fill_parent"
-			android:layout_width="fill_parent">
+			android:layout_width="fill_parent" android:gravity="center">
 			<TableRow android:layout_height="wrap_content"
-				android:layout_width="wrap_content">
+				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:text="@string/pushups"
 					android:layout_height="wrap_content" android:layout_width="wrap_content"
 					android:gravity="center"></TextView>
@@ -38,9 +38,9 @@
 		</TableLayout>
 		<TableLayout android:layout_height="fill_parent"
 			android:stretchColumns="0,2" android:id="@+id/afi_situp_table"
-			android:layout_width="fill_parent">
+			android:layout_width="fill_parent" android:gravity="center">
 			<TableRow android:layout_height="wrap_content"
-				android:layout_width="wrap_content">
+				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:text="@string/situps"
 					android:layout_height="wrap_content" android:layout_width="wrap_content"
 					android:gravity="center"></TextView>
