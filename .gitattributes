@@ -101,6 +101,7 @@ res/values/strings.xml -text
 res/xml/preferences.xml -text svneol=unset#text/plain
 src/com/rwoar/pfacalculator/CalculatorVO.java -text
 src/com/rwoar/pfacalculator/PFACalculator.java -text
+src/com/rwoar/pfacalculator/PFAUtils.java -text svneol=unset#text/plain
 src/com/rwoar/pfacalculator/Preferences.java -text svneol=unset#text/plain
 src/com/rwoar/pfacalculator/ScoreCalculator.java -text
 src/com/rwoar/pfacalculator/widget/NumberPicker.java -text
