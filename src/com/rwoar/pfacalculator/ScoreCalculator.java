@@ -229,6 +229,15 @@ public class ScoreCalculator {
 		}
 	}
 	
+	public boolean passedRun(int runtime){
+		if (runtime > Integer.parseInt(runProperties.getProperty("min_pass_amount"))){
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
 	public boolean passedWalk(){
 		if (aerobicPref && aerobicCompPref.equals(Integer.toString(WALK)) 
 				&& getVO2Max() < Integer.parseInt(walkProperties.getProperty("min_pass_amount"))){
