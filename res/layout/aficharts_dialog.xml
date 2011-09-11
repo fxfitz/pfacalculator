@@ -12,7 +12,7 @@
 				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:gravity="center"
-					android:text="@string/aerobic_fitness"></TextView>
+					android:text="@string/aerobic_fitness" android:textStyle="bold" android:textColor="#FFFFFF"></TextView>
 			</TableRow>
 		</TableLayout>
 
@@ -23,7 +23,7 @@
 				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:gravity="center"
-					android:text="@string/waist_measurement"></TextView>
+					android:text="@string/waist_measurement" android:textColor="#FFFFFF" android:textStyle="bold"></TextView>
 			</TableRow>
 		</TableLayout>
 		<TableLayout android:stretchColumns="0,2"
@@ -33,7 +33,7 @@
 				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:text="@string/pushups"
 					android:layout_height="wrap_content" android:layout_width="wrap_content"
-					android:gravity="center"></TextView>
+					android:gravity="center" android:textColor="#ffffff" android:textStyle="bold"></TextView>
 			</TableRow>
 		</TableLayout>
 		<TableLayout android:layout_height="fill_parent"
@@ -43,7 +43,7 @@
 				android:layout_width="wrap_content" android:gravity="center">
 				<TextView android:text="@string/situps"
 					android:layout_height="wrap_content" android:layout_width="wrap_content"
-					android:gravity="center"></TextView>
+					android:gravity="center" android:textStyle="bold" android:textColor="#ffffff"></TextView>
 			</TableRow>
 		</TableLayout>
 
