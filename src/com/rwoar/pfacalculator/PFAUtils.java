@@ -6,10 +6,11 @@ import java.util.ListIterator;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -60,17 +61,19 @@ public class PFAUtils {
 		TableRow tr = new TableRow(context);
 		tr.setLayoutParams(new LayoutParams(
 				LayoutParams.FILL_PARENT,
-				LayoutParams.WRAP_CONTENT));
-
+				LayoutParams.FILL_PARENT));
+		
+		LayoutParams childLp = new LayoutParams(0, LayoutParams.FILL_PARENT, 1);
+		
 		TextView amount = new TextView(context);
 		amount.setText(first);
-		tr.setGravity(Gravity.CENTER);
-		tr.addView(amount);
+		amount.setGravity(Gravity.CENTER);
+		tr.addView(amount,childLp);
 
 		TextView score = new TextView(context);
 		score.setText(second);
-		tr.setGravity(Gravity.CENTER);
-		tr.addView(score);
+		score.setGravity(Gravity.CENTER);
+		tr.addView(score,childLp);
 
 		return tr;
 	}
