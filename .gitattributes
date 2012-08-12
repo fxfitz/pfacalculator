@@ -95,9 +95,12 @@ res/layout/pfa_row_view.xml -text
 res/layout/run_dialog.xml -text
 res/layout/waist_dialog.xml -text
 res/menu/pfa_calculator.xml -text
+res/values-v11/styles.xml -text svneol=unset#text/plain
+res/values-v14/styles.xml -text svneol=unset#text/plain
 res/values/array.xml -text svneol=unset#text/plain
 res/values/attrs.xml -text
 res/values/strings.xml -text
+res/values/styles.xml -text svneol=unset#text/plain
 res/xml/preferences.xml -text svneol=unset#text/plain
 src/com/rwoar/pfacalculator/CalculatorVO.java -text
 src/com/rwoar/pfacalculator/PFACalculator.java -text
