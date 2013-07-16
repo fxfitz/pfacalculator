@@ -52,6 +52,8 @@ assets/under30/male/waist.properties -text
 assets/under30/male/walk.properties -text svneol=unset#text/plain
 libs/GoogleAdMobAdsSdk-6.1.0.jar -text
 libs/libGoogleAnalyticsV2.jar -text
+/proguard-project.txt -text svneol=unset#text/plain
+/project.properties -text svneol=unset#text/plain
 res/drawable-hdpi/timepicker_down_disabled.9.png -text
 res/drawable-hdpi/timepicker_down_disabled_focused.9.png -text
 res/drawable-hdpi/timepicker_down_normal.9.png -text
