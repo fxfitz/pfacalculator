@@ -328,15 +328,10 @@ public class PFACalculator extends ListActivity {
 			return false;
 		else if (situpPref == true && calculatorVO.getSitups() == CalculatorVO.UNASSIGNED)
 			return false;
-		else if (aerobicPref == true && calculatorVO.getRunMinute() == CalculatorVO.UNASSIGNED)
+		else if (aerobicPref == true && calculatorVO.getRunWalkMinute() == CalculatorVO.UNASSIGNED)
 			return false;
 		else if (waistPref == true && calculatorVO.getWaist() == CalculatorVO.UNASSIGNED)
 			return false;
-		else if (aerobicPref == true && aerobicCompPref.equals(Integer.toString(WALK)))
-			if (calculatorVO.getExactAge() == CalculatorVO.UNASSIGNED
-					|| calculatorVO.getHeartRate() == CalculatorVO.UNASSIGNED)
-				return false;
-
 		return true;
 	}
 
@@ -427,25 +422,7 @@ public class PFACalculator extends ListActivity {
 			} else if (aerobicCompPref.equals(Integer.toString(WALK))) {
 				temp3.put("option","Walk Time");
 				temp3.put("selection", calculatorVO.getRunWalkString());
-				temp3.put("description", "1.0 Mile Walk");
-
-				HashMap<String,String> temp6 = new HashMap<String,String>();
-				temp6.put("option","Exact Age");
-				temp6.put("selection", calculatorVO.getExactAgeString());
-				temp6.put("description", "Exact Age");
-				optionsList.add(temp6);
-
-				HashMap<String,String> temp7 = new HashMap<String,String>();
-				temp7.put("option","Heart Rate");
-				temp7.put("selection", calculatorVO.getHeartRateString());
-				temp7.put("description", "Heart Rate After Walk");
-				optionsList.add(temp7);
-
-				HashMap<String,String> temp8 = new HashMap<String,String>();
-				temp8.put("option","Weight");
-				temp8.put("selection", calculatorVO.getWeightString());
-				temp8.put("description", "Weight in Pounds");
-				optionsList.add(temp8);
+				temp3.put("description", "2.0 Kilometer Walk");
 			}
 			optionsList.add(temp3);
 		}
@@ -561,15 +538,6 @@ public class PFACalculator extends ListActivity {
 					break;
 				case WAIST_DIALOG_ID:
 					calculatorVO.setWaist(newNumber);
-					break;
-				case EXACT_AGE_DIALOG_ID:
-					calculatorVO.setExactAge(newNumber);
-					break;
-				case HEART_RATE_DIALOG_ID:
-					calculatorVO.setHeartRate(newNumber);
-					break;
-				case WEIGHT_DIALOG_ID:
-					calculatorVO.setWeight(newNumber);
 					break;
 				}
 

@@ -2,7 +2,7 @@
 <resources>
     <string-array name="aerobic_component">
         <item>Run (1.5 Mile)</item>
-        <item>Walk (1.0 Mile)</item>
+        <item>Walk (2.0 Kilometers)</item>
     </string-array>
     
     <string-array name="aerobic_component_values">

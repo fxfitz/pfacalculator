@@ -29,13 +29,13 @@ public class ScoreCalculator {
 	private double situpScore = 0;
 	private double pushupScore = 0;
 	private double waistScore = 0;
-	private double walkScore = 0;
+	
+	private boolean passedWalk = false;
 	
 	private int min_situp, max_situp, min_situp_point;
 	private int min_pushup, max_pushup, min_pushup_point;
 	private double min_waist, max_waist;
 	private int min_run, max_run;
-	private int min_walk, max_walk;
 	
 	private boolean pushupPref;
 	private boolean situpPref;
@@ -74,7 +74,7 @@ public class ScoreCalculator {
 			if (aerobicCompPref.equals(Integer.toString(RUN)))
 				runScore = setRunScore();
 			else
-				walkScore = setWalkScore();
+				passedWalk = passedWalk();
 		}
 		
 		setWaistMinMax();	
@@ -219,7 +219,7 @@ public class ScoreCalculator {
 	}
 	
 	public boolean passedRun(){
-		int runtime = Integer.parseInt(Integer.toString(calculatorVO.getRunMinute()*100+calculatorVO.getRunSecond()));
+		int runtime = Integer.parseInt(Integer.toString(calculatorVO.getRunWalkMinute()*100+calculatorVO.getRunWalkSecond()));
 		if (aerobicPref && aerobicCompPref.equals(Integer.toString(RUN)) 
 				&& runtime > Integer.parseInt(runProperties.getProperty("min_pass_amount"))){
 			return false;
@@ -282,7 +282,7 @@ public class ScoreCalculator {
 
 
 	private double setRunScore(){
-		return getIndividualRunScore(calculatorVO.getRunMinute(), calculatorVO.getRunSecond());
+		return getIndividualRunScore(calculatorVO.getRunWalkMinute(), calculatorVO.getRunWalkSecond());
 	}
 	
 
@@ -294,7 +294,7 @@ public class ScoreCalculator {
 	private int getVO2Max(){
 		int weight = calculatorVO.getWeight();
 		int age = calculatorVO.getExactAge();
-		double run = calculatorVO.getRunMinute() + (calculatorVO.getRunSecond()/60.0);
+		double run = calculatorVO.getRunWalkMinute() + (calculatorVO.getRunWalkSecond()/60.0);
 		int hr = calculatorVO.getHeartRate();
 				
 		//Log.d("getVO2Max()", "weight="+weight+";age="+age+";run="+run+";hr="+hr);

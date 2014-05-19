@@ -29,10 +29,6 @@ public class CalculatorVO implements Serializable {
 	private int pushups = 0;
 	private double waist;
 	private int[] runwalk = new int[2];
-	private int exact_age;
-	private int heart_rate;
-	private int weight;
-	
 	
 	public CalculatorVO(){
 		this.ageStringsMap.put(CalculatorVO.RUN_UNDER30, "Under 30");
@@ -52,9 +48,7 @@ public class CalculatorVO implements Serializable {
 		this.waist = UNASSIGNED;
 		this.runwalk[MINUTE] = UNASSIGNED;
 		this.runwalk[SECOND] = UNASSIGNED;
-		this.exact_age = UNASSIGNED;
-		this.heart_rate = UNASSIGNED;
-		this.weight = UNASSIGNED;
+
 	}
 	
 	/**
@@ -65,7 +59,7 @@ public class CalculatorVO implements Serializable {
 	public boolean isComplete(){
 		if (this.getAgeGroup() == UNASSIGNED || this.getGender() == UNASSIGNED
 				|| this.getSitups() == UNASSIGNED || this.getPushups() == UNASSIGNED
-				|| this.getRunMinute() == UNASSIGNED || this.getRunSecond() == UNASSIGNED
+				|| this.getRunWalkMinute() == UNASSIGNED || this.getRunWalkSecond() == UNASSIGNED
 				|| this.getWaist() == UNASSIGNED)
 			return false;
 		else
@@ -137,24 +131,6 @@ public class CalculatorVO implements Serializable {
 		return situpString;
 	}
 	
-	public void setWeight(int weight){
-		this.weight = weight;
-	}
-	
-	public int getWeight(){
-		return this.weight;
-	}
-	
-	public String getWeightString(){
-		String weightString = new String();
-		if (getWeight() == UNASSIGNED)
-			weightString = unassignedString;
-		else
-			weightString = Integer.toString(getWeight()) + " lbs";
-		
-		return weightString;
-	}
-	
 	public void setPushups(int pushups){
 		this.pushups = pushups;
 	}
@@ -173,22 +149,22 @@ public class CalculatorVO implements Serializable {
 		return pushupString;
 	}
 	
-	public int getRunMinute(){
+	public int getRunWalkMinute(){
 		return this.runwalk[MINUTE];
 	}
 	
-	public int getRunSecond(){
+	public int getRunWalkSecond(){
 		return this.runwalk[SECOND];
 	}
 	
 	public String getRunWalkString(){
 		String runTime = new String();
-		if (getRunMinute() == UNASSIGNED || 
-				getRunSecond() == UNASSIGNED){
+		if (getRunWalkMinute() == UNASSIGNED || 
+				getRunWalkSecond() == UNASSIGNED){
 			runTime = unassignedString;
 		}
 		else
-			runTime = getRunMinute() + ":" + String.format("%02d", getRunSecond());
+			runTime = getRunWalkMinute() + ":" + String.format("%02d", getRunWalkSecond());
 	
 		
 		return runTime;
@@ -215,42 +191,6 @@ public class CalculatorVO implements Serializable {
 			waistString = Double.toString(getWaist()) + " inches";
 		
 		return waistString;
-	}
-	
-	public int getExactAge(){
-		return exact_age;
-	}
-	
-	public void setExactAge(int ea){
-		exact_age = ea;
-	}
-	
-	public String getExactAgeString(){
-		String exactAgeString = new String();
-		if (getExactAge() == UNASSIGNED)
-			exactAgeString = unassignedString;
-		else
-			exactAgeString = Integer.toString(getExactAge()) + " years old";
-		
-		return exactAgeString;
-	}
-	
-	public int getHeartRate(){
-		return heart_rate;
-	}
-	
-	public void setHeartRate(int hr){
-		heart_rate = hr;
-	}
-	
-	public String getHeartRateString(){
-		String heartRateString = new String();
-		if (getHeartRate() == UNASSIGNED)
-			heartRateString = unassignedString;
-		else
-			heartRateString = Integer.toString(getHeartRate()) + " bpm";
-		
-		return heartRateString;
 	}
 
 }
