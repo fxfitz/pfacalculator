@@ -49,11 +49,7 @@ public class ScoreCalculator {
 	// Used for rounding scores to one decimal place
 	private final DecimalFormat oneDForm = new DecimalFormat("#.#");
 
-	public ScoreCalculator(Activity ac, CalculatorVO calc, SharedPreferences prefs){
-//		if (calc.isComplete() == false){
-//			throw new RuntimeException("All options must be selected (pushups, situps, gender, etc)");
-//		}
-		
+	public ScoreCalculator(Activity ac, CalculatorVO calc, SharedPreferences prefs){		
 		if (prefs != null)
 			setPrefs(prefs);
 		
@@ -81,7 +77,6 @@ public class ScoreCalculator {
 		setPushupMinMax();
 		setSitupMinMax();
 		setRunMinMax();
-		setWalkMinMax();
 		
 	}
 	
@@ -111,8 +106,6 @@ public class ScoreCalculator {
 			maxpoints += Double.parseDouble(runProperties.getProperty("max_point"));
 			if (aerobicCompPref.equals(Integer.toString(RUN)))
 				totalpoints += runScore;
-			else
-				totalpoints += walkScore;
 		}
 		if (waistPref == true){
 			maxpoints += Double.parseDouble(waistProperties.getProperty("max_point"));
@@ -165,18 +158,6 @@ public class ScoreCalculator {
 	
 	public int getRunMax(){
 		return this.max_run;
-	}
-	
-	public double getWalkScore(){
-		return walkScore;
-	}
-	
-	public int getWalkMin(){
-		return this.min_walk;
-	}
-	
-	public int getWalkMax(){
-		return this.max_walk;
 	}
 	
 	public double getWaistScore(){
@@ -239,8 +220,10 @@ public class ScoreCalculator {
 	}
 	
 	public boolean passedWalk(){
+		int walktime = PFAUtils.formatToIntTime(calculatorVO.getRunWalkMinute(), calculatorVO.getRunWalkSecond());
+		
 		if (aerobicPref && aerobicCompPref.equals(Integer.toString(WALK)) 
-				&& getVO2Max() < Integer.parseInt(walkProperties.getProperty("min_pass_amount"))){
+				&& walktime > Integer.parseInt(walkProperties.getProperty("min_pass_amount"))){
 			return false;
 		}
 		else {
@@ -285,53 +268,11 @@ public class ScoreCalculator {
 		return getIndividualRunScore(calculatorVO.getRunWalkMinute(), calculatorVO.getRunWalkSecond());
 	}
 	
-
 	private void setRunMinMax(){
 		this.min_run = Integer.parseInt(runProperties.getProperty("min_pass_amount"));
 		this.max_run = Integer.parseInt(runProperties.getProperty("max_point_amount"));
 	}
 	
-	private int getVO2Max(){
-		int weight = calculatorVO.getWeight();
-		int age = calculatorVO.getExactAge();
-		double run = calculatorVO.getRunWalkMinute() + (calculatorVO.getRunWalkSecond()/60.0);
-		int hr = calculatorVO.getHeartRate();
-				
-		//Log.d("getVO2Max()", "weight="+weight+";age="+age+";run="+run+";hr="+hr);
-		
-		int int_vo2max;
-		double VO2max = 132.853 - (.0769 * weight) - (.3877 * age) - (3.2649 * run) - (.1565*hr);
-		if (calculatorVO.getGender() == CalculatorVO.MALE)
-			VO2max += 6.315;
-		
-		int_vo2max = (int) Math.round(VO2max);
-		
-		return int_vo2max;
-	}
-	
-	private double setWalkScore(){
-		double score = 0;
-		int VO2max = getVO2Max();
-		
-		if (VO2max >= Double.parseDouble(walkProperties.getProperty("max_point_amount"))){
-			score = Double.parseDouble(walkProperties.getProperty("max_point"));
-		}
-		else if (VO2max < Double.parseDouble(walkProperties.getProperty("min_pass_amount"))){
-			score = Double.parseDouble(walkProperties.getProperty("min_point"));
-		}
-		else {
-			score = Double.parseDouble(walkProperties.getProperty(""+VO2max));
-		}
-
-		
-		return Double.valueOf(oneDForm.format(score));
-	}
-	
-	private void setWalkMinMax(){
-		this.min_walk = Integer.parseInt(walkProperties.getProperty("min_pass_amount"));
-		this.max_walk = Integer.parseInt(walkProperties.getProperty("max_point_amount"));
-	}
-
 	private double setWaistScore(){
 		double waist = calculatorVO.getWaist();
 		double score = getIndividualWaistScore(waist);
