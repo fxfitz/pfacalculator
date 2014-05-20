@@ -199,8 +199,7 @@ public class PFACalculator extends ListActivity {
 				if (aerobicCompPref.equals(Integer.toString(RUN)))
 					componentScore = sc.getRunScore();
 				else
-					//componentScore = sc.getWalkScore();
-					componentScore = 100.0;
+					componentScore = sc.getWalkScore();
 
 				runWalkScore.setText("("+componentScore.toString()+")");
 			}
