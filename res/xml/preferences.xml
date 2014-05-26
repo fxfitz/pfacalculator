@@ -20,7 +20,7 @@
                         android:key="runPref" />
                 <ListPreference
                 	android:title="Aerobic Test"
-                	android:summary="1.5 Mile Walk or 1.0 Mile Run"
+                	android:summary="1.5 Mile Run or 2.0 Km Walk"
                 	android:dependency="runPref"
                 	android:key="aerobicCompPref"
                 	android:defaultValue="1"
