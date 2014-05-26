@@ -8,5 +8,19 @@
     <string-array name="aerobic_component_values">
         <item>1</item>
 		<item>2</item>
+    </string-array>
+    <string-array name="altitude_adjustment">
+        <item >No Adjustment</item>
+        <item >5250 ft - 5499 ft</item>
+        <item >5500 ft - 5999 ft</item>
+        <item >6000 ft - 6599 ft</item>
+        <item >6600 ft +</item>
+    </string-array>
+    <string-array name="altitude_adjustment_values">
+        <item >0</item>
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
     </string-array>   
 </resources>
