@@ -106,12 +106,21 @@ public class ScoreCalculator {
 				maxpoints += Double.parseDouble(runProperties.getProperty("max_point"));
 				totalpoints += runScore;
 			}	
+			else if (aerobicCompPref.equals(Integer.toString(WALK))){
+				// Ideally, I would do the following...
+				//maxpoints += Double.parseDouble(walkProperties.getProperty("max_point"));
+				
+				// But since I'm too lazy to and don't feel like adding max_point to every
+				// walk property file, I'm going to do this instead (since the walk is pass/fail)
+				maxpoints += 100.0;
+				totalpoints += walkScore;
+			}
 		}
 		if (waistPref == true){
 			maxpoints += Double.parseDouble(waistProperties.getProperty("max_point"));
 			totalpoints += waistScore;
 		}
-		
+				
 		total = totalpoints / maxpoints * 100;
 		return Double.valueOf(oneDForm.format(total));		
 	}
