@@ -313,6 +313,8 @@ public class PFACalculator extends ListActivity {
 			calculatorVO.clear();
 			updateList();
 			break;
+		case R.id.preferencesButton:
+			this.openOptionsMenu();
 		default:
 			// Do nothing!
 			return;
