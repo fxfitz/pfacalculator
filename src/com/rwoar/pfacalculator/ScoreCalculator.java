@@ -41,6 +41,8 @@ public class ScoreCalculator {
 	private boolean aerobicPref;
 	private boolean waistPref;
 	private String aerobicCompPref;
+	private String altitudePref;
+	
 	
 	private final int RUN = 1;
 	private final int WALK = 2;
@@ -85,6 +87,7 @@ public class ScoreCalculator {
 		aerobicPref = prefs.getBoolean("runPref", true);
 		waistPref = prefs.getBoolean("waistPref", true);
 		aerobicCompPref = prefs.getString("aerobicCompPref", "1");
+		altitudePref = prefs.getString("altitudePref", "1"); // WHAT IS THIS?!?
 	}
 	
 	public double getTotalScore(){
@@ -235,8 +238,23 @@ public class ScoreCalculator {
 	public boolean passedWalk(){
 		int walktime = PFAUtils.formatToIntTime(calculatorVO.getRunWalkMinute(), calculatorVO.getRunWalkSecond());
 		
+		int min_pass_amount;
+		
+		if (altitudePref.equals("1"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp1"));
+		else if (altitudePref.equals("2"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp2"));
+		else if (altitudePref.equals("3"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp3"));
+		else if (altitudePref.equals("4"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp4"));
+		else
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_amount"));
+		
+		Log.d("min_pass_amount", Integer.toString(min_pass_amount));
+		
 		if (aerobicPref && aerobicCompPref.equals(Integer.toString(WALK)) 
-				&& walktime > Integer.parseInt(walkProperties.getProperty("min_pass_amount"))){
+				&& walktime > min_pass_amount){
 			return false;
 		}
 		else {
@@ -284,8 +302,21 @@ public class ScoreCalculator {
 	private double setWalkScore(){
 		int walktime = PFAUtils.formatToIntTime(calculatorVO.getRunWalkMinute(), calculatorVO.getRunWalkSecond());
 		
+		int min_pass_amount;
+		
+		if (altitudePref.equals("1"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp1"));
+		else if (altitudePref.equals("2"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp2"));
+		else if (altitudePref.equals("3"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp3"));
+		else if (altitudePref.equals("4"))
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_alt_grp4"));
+		else
+			min_pass_amount = Integer.parseInt(walkProperties.getProperty("min_pass_amount"));
+		
 		if (aerobicPref && aerobicCompPref.equals(Integer.toString(WALK)) 
-				&& walktime > Integer.parseInt(walkProperties.getProperty("min_pass_amount"))){
+				&& walktime > min_pass_amount){
 			return 0.0;
 		}
 		else {
