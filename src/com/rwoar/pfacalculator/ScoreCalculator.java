@@ -24,6 +24,7 @@ public class ScoreCalculator {
 	private final Properties pushupProperties;
 	private final Properties runProperties;
 	private final Properties walkProperties;
+	private final Properties runAltAdjustProperties;
 	
 	private double runScore = 0;
 	private double walkScore = 0;
@@ -61,6 +62,14 @@ public class ScoreCalculator {
 		waistProperties = this.getProperties("waist.properties");
 		runProperties = this.getProperties("run.properties");
 		walkProperties = this.getProperties("walk.properties");
+		
+		AssetManager assetManager = parentActivity.getAssets();
+		runAltAdjustProperties = new Properties();
+		try {
+			runAltAdjustProperties.load(assetManager.open("run_alt_adjustments.properties"));
+		} catch (IOException e) {
+			Log.e("ScoreCalculator.getProperties()", "FAILED TO OPEN PROPERTIES FILE! run_alt_adjustments.properties");
+		}
 		
 		waistScore = setWaistScore();
 		if (situpPref)
@@ -443,7 +452,24 @@ public class ScoreCalculator {
 		// minute*100 + second
 		// this formula effectively removes the : from the time
 		int runtime = PFAUtils.formatToIntTime(minute, second);
-
+		
+		// Adjust runtime for altitude
+		if (!altitudePref.equals("0")){
+			LinkedList<Integer> startIntervals = getRunAltAdjustIntervals();
+			ListIterator<Integer> intervalItr = startIntervals.listIterator();
+			while (intervalItr.hasNext()){
+				Integer time = intervalItr.next();
+				
+				if (runtime < time){
+					// The double call is needed apparently :(
+					time = intervalItr.previous();
+					time = intervalItr.previous();
+					runtime = getRunAltitudeCorrectedTime(runtime, time, Integer.parseInt(altitudePref));
+					break;
+				}
+			}
+		}
+		
 		// First check to see runtime is above max_point_amount or under min_point_amount
 		if (runtime <= Integer.parseInt(runProperties.getProperty("max_point_amount"))){
 			score = Double.parseDouble(runProperties.getProperty("max_point"));
@@ -490,5 +516,37 @@ public class ScoreCalculator {
 		Collections.sort(startIntervals);
 		
 		return startIntervals;
+	}
+	
+	public LinkedList<Integer> getRunAltAdjustIntervals(){
+		LinkedList<Integer> startIntervals = new LinkedList<Integer>();
+		Set<?> keys=runAltAdjustProperties.keySet();
+		Iterator<String> keysItr = (Iterator<String>) keys.iterator();
+		while(keysItr.hasNext()){
+			String key = (String) keysItr.next();
+			try{
+				startIntervals.add(Integer.parseInt(key));
+			} catch (Exception e){
+				// Ignore it!
+			}
+		}
+		
+		// Sort the intervals
+		Collections.sort(startIntervals);
+		
+		return startIntervals;
+	}
+	
+	private int getRunAltitudeCorrectedTime(int runtime, int timeinterval, int altCorrectionCategory){
+		if (altCorrectionCategory == 0){
+			return runtime;
+		}
+		int retvalue;
+		String value = runAltAdjustProperties.getProperty(Integer.toString(timeinterval));
+		String[] adjustments = value.split(",");
+		Log.d("getRunAltitudeCorrectedTime()", String.format("Got arguments: %d, %d, %d", runtime,timeinterval,altCorrectionCategory));
+		retvalue = runtime - Integer.parseInt(adjustments[altCorrectionCategory-1]);
+		Log.d("getRunAltitudeCorrectedTime()", String.format("Returning: %d", retvalue));
+		return retvalue;
 	}
 }
